@@ -11,8 +11,6 @@ app = Flask(__name__)
 
 Base=declarative_base()
 postgresql_uri=os.environ['DATABASE_URL']
-API_ID = os.environ['API_ID']
-API_KEY = os.environ['API_KEY']
 engine=create_engine(postgresql_uri)
 
 Session = sessionmaker(bind=engine)
