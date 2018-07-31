@@ -16,26 +16,26 @@ def createTables():
                                 password text not null,\
                                 role text not null);""")
 
-    db.execute("""CREATE table if not exists mentee(\
-                                    id integer references userdata(id) primary key,\
-                                    username text not null references userdata(username),\
-                                    industry text not null,\
-                                    market text not null,\
-                                    help text not null,\
-                                    location text not null,\
-                                    pitch text not null,\
-                                    commitment text not null,\
-                                    experience text not null);""")
-
-    db.execute("""CREATE table if not exists mentor(\
-                                id integer references userdata(id) primary key,\
-                                username text not null references userdata(username),\
-                                industry text not null,\
-                                help text not null,\
-                                location text not null,\
-                                contribute text not null,\
-                                commitment text not null,\
-                                experience text not null);""")
+    # db.execute("""CREATE table if not exists mentee(\
+    #                                 id integer references userdata(id) primary key,\
+    #                                 username text not null references userdata(username),\
+    #                                 industry text not null,\
+    #                                 market text not null,\
+    #                                 help text not null,\
+    #                                 location text not null,\
+    #                                 pitch text not null,\
+    #                                 commitment text not null,\
+    #                                 experience text not null);""")
+    #
+    # db.execute("""CREATE table if not exists mentor(\
+    #                             id integer references userdata(id) primary key,\
+    #                             username text not null references userdata(username),\
+    #                             industry text not null,\
+    #                             help text not null,\
+    #                             location text not null,\
+    #                             contribute text not null,\
+    #                             commitment text not null,\
+    #                             experience text not null);""")
     db.commit()
 
 createTables()

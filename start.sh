@@ -1,8 +1,9 @@
-
+#!/bin/bash
 PROGNAME=$0
 
 build() {
-    (cd app/static; npm run build)
+
+    (cd app/static; npm install; npm run build)
 }
 
 run() {
@@ -37,4 +38,5 @@ while [ "$1" != "" ]; do
     shift
 done
 
+build
 run
