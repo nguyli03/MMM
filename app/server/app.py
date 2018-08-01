@@ -31,8 +31,11 @@ def loginHelper():
     data = request.get_json(silent=True)
     item = {'username': data.get('inputusername'), 'password': data.get('inputpassword')}
     hashed_password = hashlib.sha512(item['password'].encode('utf-8') + salt.encode('utf-8')).hexdigest()
-    res =  db.execute("""SELECT id, password from userdata where username = '%s';"""%(item['username']))
+    res =  db.execute("""SELECT username, password from userdata where username = '%s';"""%(item['username']))
     res = res.fetchall()
+    if len(res) == 0:
+        return '/signup'
+    print(res)
     if len(res[0][0]) > 0 and len(res[0][1]) > 0:
         if hashed_password == res[0][1]:
             return '/'
@@ -57,7 +60,7 @@ def signupHelper():
     if len(res) >0:
         return '/login'
     else:
-        db.execute("""INSERT into userdata(username, password) VALUES ('%s','%s');"""%(item['username'],item['password']))
+        db.execute("""INSERT into userdata(username, password, role) VALUES ('%s','%s','founder');"""%(item['username'],item['password']))
         db.commit()
 
         # session['username'] = item['username']

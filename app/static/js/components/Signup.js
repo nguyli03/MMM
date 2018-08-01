@@ -15,12 +15,14 @@ class Signup extends Component {
    this.updateInputValuePassword = this.updateInputValuePassword.bind(this);
    this.updateInputValueRetypePassword = this.updateInputValueRetypePassword.bind(this);
    this.redirectLogin = this.redirectLogin.bind(this);
+   this.sendInfo = this.sendInfo.bind(this);
   }
 
   handleClick(){
+    console.log("you put in the username");
     console.log("value of username: "+this.state.inputusername);
-    console.log("value of password: "+this.state.inputpassword);
-    console.log("role of the user: "+this.state.inputrole)
+    console.log("you put in the password");
+    console.log("value of password"+this.state.inputpassword);
   }
 
   updateInputValueUserName(evt){
@@ -31,8 +33,8 @@ class Signup extends Component {
     this.setState({inputpassword: evt.target.value});
   }
 
-  updateInputUserRole(evt){
-    this.setState({inputrole: evt.target.value})
+  updateInputValueRetypePassword(evt){
+    this.setState({inputretypepassword: evt.target.value});
   }
 
   redirectLogin(){
@@ -46,16 +48,16 @@ class Signup extends Component {
       <Jumbotron>
         <h2> Sign up for MentorMenteeMatch</h2>
           <Label><b>Username</b></Label>
-          <Input type="text" id ='username' placeholder="Enter Username" className="inputusername" value = {this.state.inputusername} onChange={this.updateInputValueUserName.bind(this)} required />
+          <Input type="text" id ='username' placeholder="Enter Username" className="inputusername" value = {this.state.inputusername} onChange={this.updateInputValueUserName} required />
 
           <Label><b>Password</b></Label>
-          <Input type="password" id ='password' placeholder="Enter Password" className="inputpassword" value ={this.state.inputpassword} onChange={this.updateInputValuePassword.bind(this)} required />
+          <Input type="password" id ='password' placeholder="Enter Password" className="inputpassword" value ={this.state.inputpassword} onChange={this.updateInputValuePassword} required />
 
           <Label><b>Retype Password</b></Label>
-          <Input type="password" id ='retypepassword' placeholder="Retype Password" className="inputpassword" value ={this.state.inputretypepassword} onChange={this.updateInputValueRetypePassword.bind(this)} required />
+          <Input type="password" id ='retypepassword' placeholder="Retype Password" className="inputretypepassword" value ={this.state.inputretypepassword} onChange={this.updateInputValueRetypePassword} required />
 
           <hr/>
-          <Button type="submit" id='signupButton' color="primary" onClick ={this.sendInfo.bind(this)}> Signup</Button>
+          <Button type="submit" id='signupButton' color="primary" onClick ={this.sendInfo}> Signup</Button>
           <hr />
           <Button type ="button" id ='signupButton' color="danger" onClick = {this.redirectLogin}>Return to login</Button>
       </Jumbotron>

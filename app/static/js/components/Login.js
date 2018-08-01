@@ -13,6 +13,8 @@ class Login extends Component {
    this.handleClick = this.handleClick.bind(this);
    this.updateInputValueUserName = this.updateInputValueUserName.bind(this);
    this.updateInputValuePassword = this.updateInputValuePassword.bind(this);
+   this.sendInfo = this.sendInfo.bind(this);
+   this.redirectSignUp = this.redirectSignUp.bind(this);
   }
 
   handleClick(){
@@ -42,10 +44,10 @@ class Login extends Component {
         <h2> Log in to MentorMenteeMatch</h2>
         <div>
           <Label><b>Username</b></Label>
-          <Input type="text" id ='username' placeholder="Enter Username" className="inputusername" value = {this.state.inputusername} onChange={this.updateInputValueUserName.bind(this)} required />
+          <Input type="text" id ='username' placeholder="Enter Username" className="inputusername" value = {this.state.inputusername} onChange={this.updateInputValueUserName} required />
           <Label><b>Password</b></Label>
-          <Input type="password" id ='password' placeholder="Enter Password" className="inputpassword" value ={this.state.inputpassword} onChange={this.updateInputValuePassword.bind(this)} required />
-          <Button type="submit" id='loginButton' color="primary" onClick ={this.sendInfo.bind(this)}> Login</Button>
+          <Input type="password" id ='password' placeholder="Enter Password" className="inputpassword" value ={this.state.inputpassword} onChange={this.updateInputValuePassword} required />
+          <Button type="submit" id='loginButton' color="primary" onClick ={this.sendInfo}> Login</Button>
         </div>
         <hr/>
         <div id ="signup">
@@ -63,13 +65,17 @@ class Login extends Component {
                       'Content-Type': 'application/json',
                       'Access-Control-Allow-Origin': '*'}
     }
-    axios.post('/loginC', {
+    axios.post('/loginHelper', {
       inputusername: this.state.inputusername,
       inputpassword: this.state.inputpassword
     }, config)
     .then(function (response) {
       if (response.data == '/login'){
         alert('The combination is not correct, please try again')
+      }
+      else if (response.data == '/signup'){
+        alert('You have not create an account with us yet. We will direct you to the Sign up page')
+        window.location = response.data;
       }
       else {
         window.location = response.data;
